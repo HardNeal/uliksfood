@@ -22,12 +22,14 @@ class ApplicationController < ActionController::Base
   end
 
   def calc
-    cart_total = 0
-    Cart.all.each do |allcart|
-      current_user.allcart.each do |cart|
-        cart_total += (cart.food.price * cart.count)
-      end
-    end
-    return cart_total
+    if user_signed_in?   
+      cart_total = 0
+        current_user.carts.each do |cart|
+          cart_total += (cart.food.price * cart.count)
+        end
+      return cart_total
+    else 
+     'Please log in'
+    end  
   end
 end

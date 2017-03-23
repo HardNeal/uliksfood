@@ -43,7 +43,7 @@
             </li>
           </ul>
         <% else %>
-          <%= link_to 'Sign up', new_user_registration_path, class: 'btn btn-default' %>
+          <%= link_to 'Sign up', new_user_registration_path, class: 'btn btn-default navbar-btn' %>
           <%= link_to 'Log in', new_user_session_path, class: 'btn btn-default navbar-btn' %>
         <% end %>
       </ul>
@@ -55,13 +55,12 @@
     <h4>
       <span class="glyphicon glyphicon-large glyphicon-shopping-cart" aria-hidden="true">Cart</span>
     </h4>
-      <% Cart.all.each do |cartt| %>
-       <%= current_user.cartt.each do |cart| %>
-        <%= cart.food.name %>
-        <%= cart.food.price %>
-        <%= cart.count %>
+      <% if user_signed_in? %>
+       <% current_user.carts.each do |cart| %>
+        <div>Название: <b><%= cart.food.name %></b></div>
+        <div>Цена: <b><%= cart.food.price %></b></div>
+        <div>Кол-во: <b><%= cart.count %></b></div>
        <% end %>
-      <% end %>
     <table>
       <tr>
         <th>Сумма</th>
@@ -70,10 +69,11 @@
       <tr>
         <td colspan="2">Всего: </td>
         <td><%= calc.to_i %></td>
-
       </tr>
+      <% else %>
+       <b>Что-бы купить сперва <%= link_to 'зарегистрируйтесь', new_user_session_path %></b>
+      <% end %>
     </table>
-
   </div>
 
     <%= yield %>
