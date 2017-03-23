@@ -10,6 +10,22 @@ form do |f|
     end
     f.actions
 end
+
+	index do
+		selectable_column
+		id_column
+		column :image do |place|
+			image_tag place.image.url(:thumb)
+		end
+
+		column :name do |place|
+			link_to place.name, admin_category_path(place)
+		end
+
+		column :desc
+		actions
+	end
+
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #

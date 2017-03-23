@@ -7,11 +7,8 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-<hr></hr>
-<hr></hr>
-<hr></hr>
   <body>
-  <nav class="navbar navbar-fixed-top navbar-inverse">
+  <nav class="navbar navbar-default" style="background: white">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
@@ -20,6 +17,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
+       <%= link_to 'Home', root_path, class: 'navbar-brand' %>
     </div>
     <div class="collapse navbar-collapse" id="navbar-collapse">
       <ul class="nav navbar-nav">
@@ -56,10 +54,12 @@
       <span class="glyphicon glyphicon-large glyphicon-shopping-cart" aria-hidden="true">Cart</span>
     </h4>
       <% if user_signed_in? %>
-       <% current_user.carts.each do |cart| %>
+       <% current_user.carts.each do |cart| %> 
         <div>Название: <b><%= cart.food.name %></b></div>
         <div>Цена: <b><%= cart.food.price %></b></div>
         <div>Кол-во: <b><%= cart.count %></b></div>
+        <%= link_to 'Удалить', cart, method: :delete %>
+        <hr></hr>
        <% end %>
     <table>
       <tr>

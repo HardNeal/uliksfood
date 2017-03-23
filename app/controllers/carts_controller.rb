@@ -8,8 +8,8 @@ class CartsController < ApplicationController
   end
 
   def create
-  	if Cart.find_by(food_id: params[:cart][:food_id])
-      @cart = Cart.find_by(food_id: params[:cart][:food_id])
+  	if Cart.find_by_food_id_and_user_id(params[:cart][:food_id], current_user.id)
+      @cart = Cart.find_by_food_id_and_user_id(params[:cart][:food_id], current_user.id)
       @cart.count += params[:cart][:count].to_i
     else
       @cart = Cart.new(cart_params)         
@@ -17,10 +17,6 @@ class CartsController < ApplicationController
 
     if @cart.save
       redirect_to :back
-      # respond_to do |format|
-      #   format.html { redirect_to :back }
-      #   format.js {}
-      # end
     else
       redirect_to root_path
     end

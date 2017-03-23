@@ -1,2 +1,24 @@
-<h1>Foods#index</h1>
-<p>Find me in app/views/foods/index.html.erb</p>
+<center>
+<div class="row">
+  <div class="col-xs-6 col-md-3">
+  </div>
+</div>
+</center>
+<h1> Все блюда </h1>
+<hr>
+<hr>
+
+<% Food.all.each do |f| %> 
+	<div class="">
+	<div class="col-md-3">
+	<div class="thumbnail">
+		<p>Name:<b> <%= f.name %></b></p>
+		<p>Description:<b> <%= f.desc %></b></p>  
+		<p>Price: <b><%= f.price.to_i %></b></p>
+		<p><%= image_tag f.image.url(:medium) %></p>
+		<center><p><%= link_to "Add to Cart", carts_path(cart: {:food_id => f.id, user_id: current_user, count: 1}), :method => :post, class: "btn btn-default" %></p></center>
+	</div>
+	</div>
+	</div>
+
+<% end %>
