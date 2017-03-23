@@ -1,0 +1,21 @@
+  <center>
+  	<div class="row">
+  		<div class="col-xs-6 col-md-3">
+
+  			<h1> Заведения </h1>
+  			<hr></hr>
+  			<% @categories.each do |category|%>
+  		</div>
+  	</div>
+
+  	<div class="">
+  		<div class="col-md-3">
+  			<div class="thumbnail">
+  				<p>Название: <b><%= category.name %></b></p>
+  				<p>Действие: <b><%= link_to 'Посмотреть меню', category_path(category.id) %></b></p>
+  				<p><%= image_tag category.image.url(:medium) %></p>
+  				<% end %>
+  			</div>
+  		</div>
+  	</div>
+  </center>	

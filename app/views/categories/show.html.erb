@@ -1,0 +1,26 @@
+<center>
+<div class="row">
+  <div class="col-xs-6 col-md-3">
+  </div>
+</div>
+</center>
+
+<h1> Меню для заведения "<%= @category.name %>" </h1>
+
+<% @category.foods.each do |f| %> 
+	<div class="">
+	<div class="col-md-3">
+	<div class="thumbnail">
+		<p>Name:<b> <%= f.name %></b></p>
+		<p>Description:<b> <%= f.desc %></b></p>  
+		<p>Price: <b><%= f.price.to_i %></b></p>
+		<p><%= image_tag f.image.url(:medium) %></p>
+
+   
+	</div>
+	</div>
+	</div>
+
+<% end %>
+
+
