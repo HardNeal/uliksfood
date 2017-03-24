@@ -48,34 +48,6 @@
     </div>
   </div>
 </nav>
-
-  <div class="basket">
-    <h4>
-      <span class="glyphicon glyphicon-large glyphicon-shopping-cart" aria-hidden="true">Cart</span>
-    </h4>
-      <% if user_signed_in? %>
-       <% current_user.carts.each do |cart| %> 
-        <div>Название: <b><%= cart.food.name %></b></div>
-        <div>Цена: <b><%= cart.food.price %></b></div>
-        <div>Кол-во: <b><%= cart.count %></b></div>
-        <%= link_to 'Удалить', cart, method: :delete %>
-        <hr></hr>
-       <% end %>
-    <table>
-      <tr>
-        <th>Сумма</th>
-        <th>Цена</th>
-      </tr>
-      <tr>
-        <td colspan="2">Всего: </td>
-        <td><%= calc.to_i %></td>
-      </tr>
-      <% else %>
-       <b>Что-бы купить сперва <%= link_to 'зарегистрируйтесь', new_user_session_path %></b>
-      <% end %>
-    </table>
-  </div>
-
     <%= yield %>
   </body>
 </html>

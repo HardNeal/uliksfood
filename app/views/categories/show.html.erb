@@ -6,6 +6,9 @@
 </center>
 
 <h1> Меню для заведения "<%= @category.name %>" </h1>
+  <% if @shopcart == nil %>
+		 <%= link_to 'Создать корзину', shopcarts_path(cat: @category.id), method: :post, class: 'btn btn-default' %>
+	<% end %>
 
 <% @category.foods.each do |f| %> 
 	<div class="">
@@ -15,7 +18,11 @@
 		<p>Description:<b> <%= f.desc %></b></p>  
 		<p>Price: <b><%= f.price.to_i %></b></p>
 		<p><%= image_tag f.image.url(:medium) %></p>
-		<center><p><%= link_to "Add to Cart", carts_path(cart: {:food_id => f.id, user_id: current_user, count: 1}), :method => :post, class: "btn btn-default" %></p></center>
+		<% if @shopcart == nil %>
+		 
+		<% else %>
+		<center><p><%= link_to "Add to Cart", carts_path(cart: {:food_id => f.id, count: 1, shopcart_id: @shopcart.id}), :method => :post, class: "btn btn-default" %></p></center>
+		<% end %>
 	</div>
 	</div>
 	</div>
@@ -23,3 +30,31 @@
 <% end %>
 
 
+	<% if @shopcart != nil %>
+		<div class="basket">
+    <h4>
+      <span class="glyphicon glyphicon-large glyphicon-shopping-cart" aria-hidden="true">Cart</span>
+    </h4>
+      <% if user_signed_in? %>
+       	<% @shopcart.carts.each do |cart| %>
+	        <div>Название: <b><%= cart.food.name %></b></div>
+	        <div>Цена: <b><%= cart.food.price %></b></div>
+	        <div>Кол-во: <b><%= cart.count %></b></div>
+	        <%= link_to 'Удалить', cart, method: :delete %>
+	    <% end %>    
+        <hr></hr> 
+    <table>
+      <tr>
+        <th>Сумма</th>
+        <th>Цена</th>
+      </tr>
+      <tr>
+        <td colspan="2">Всего: </td>
+        <td><%= calc.to_i %></td>
+      </tr>
+      <% else %>
+       <b>Что-бы купить сперва <%= link_to 'зарегистрируйтесь', new_user_session_path %></b>
+      <% end %>
+    </table>
+  </div>
+  <% end %>

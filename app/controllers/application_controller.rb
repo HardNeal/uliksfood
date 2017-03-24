@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_cart, :current_user, :calc
 
   private
+
   
   def logged_in_user
     unless logged_in?
@@ -26,9 +27,11 @@ class ApplicationController < ActionController::Base
   def calc
     if user_signed_in?   
       cart_total = 0
-        current_user.carts.each do |cart|
+      current_user.shopcarts.each do |shopcart|
+        shopcart.carts.each do |cart|
           cart_total += (cart.food.price * cart.count)
         end
+      end
       return cart_total
     else 
      'Please log in'
