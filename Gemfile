@@ -5,6 +5,16 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+
+group :test do
+  gem 'database_cleaner'
+  gem 'cucumber-rails', require: false
+  gem 'selenium-webdriver'
+  gem 'capybara'
+  gem 'launchy'
+  gem 'rspec'
+end
+
 gem 'paperclip', '~> 4.3'
 gem 'jquery-ui-rails', '~> 4.2.1'
 gem 'activeadmin', '~> 1.0.0.pre2'

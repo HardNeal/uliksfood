@@ -12,4 +12,8 @@ def copy_image_fixture(file_name, id)
   FileUtils.cp(file_name, dir.join(id.to_s))
 end
 
-admin = User.create(name: 'Hard', email: 'b.a.w@bk.ru', password: 'admin', password_confirmation: 'admin', admin: true)
+admin = User.create!(name: 'Hard1', email: 'adm@a.r', password: 'adminadmin', password_confirmation: 'adminadmin', address: '4mk', phone: '0555616161', admin: true)
+category = Category.create!(name: 'Kebab', desc: 'KebabCafe')
+food = Food.create(name: 'Borsh', desc: 'Eat for all', price: 100, category_id: 1)
+food = Food.create(name: 'Sushi', desc: 'Eat for all', price: 120, category_id: 1)
+food = Food.create(name: 'Origami', desc: 'Eat for all', price: 150, category_id: 1)

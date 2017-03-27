@@ -5,7 +5,11 @@ class CategoriesController < ApplicationController
 
   def show
   	@category = Category.find(params[:id])
-    @shopcart = Shopcart.find_by_user_id_and_category_id(current_user.id, @category.id)
+    if user_signed_in?
+     @shopcart = Shopcart.find_by_user_id_and_category_id(current_user.id, @category.id)
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   private 

@@ -6,9 +6,11 @@
 </center>
 
 <h1> Меню для заведения "<%= @category.name %>" </h1>
-  <% if @shopcart == nil %>
+  <a id="opencart">
+  	<% if @shopcart == nil %>
 		 <%= link_to 'Создать корзину', shopcarts_path(cat: @category.id), method: :post, class: 'btn btn-default' %>
 	<% end %>
+  </a>
 
 <% @category.foods.each do |f| %> 
 	<div class="">
@@ -21,7 +23,7 @@
 		<% if @shopcart == nil %>
 		 
 		<% else %>
-		<center><p><%= link_to "Add to Cart", carts_path(cart: {:food_id => f.id, count: 1, shopcart_id: @shopcart.id}), :method => :post, class: "btn btn-default" %></p></center>
+		<center><p><%= link_to "Add to Cart", carts_path(cart: {:food_id => f.id, count: 1, shopcart_id: @shopcart.id}), :method => :post, id: "add_cart_#{f.id}", class: "btn btn-default" %></p></center>
 		<% end %>
 	</div>
 	</div>
